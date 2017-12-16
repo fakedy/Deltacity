@@ -1,0 +1,7 @@
+"DeltaCity"
+{
+	"base"		"base"
+	"title"		"DeltaCity"
+	"maps"		"^gm_"
+	"menusystem"	"1"
+}
