@@ -9,8 +9,8 @@ if SERVER then
         playerlevel = ply:GetNWInt("level")
         ExpPoints = ply:GetNWInt("experience")
         ply:ChatPrint(ExpPoints)
-        expreq =  ExpPoints + ( baseExp + playerlevel^1.06 )
-        ply:SetNWInt("expreq", expreq)
+        --expreq =  ExpPoints + ( baseExp + playerlevel^1.06 )
+        --ply:SetNWInt("expreq", expreq)
 
 
         --timer.Create("LevelUpChecker", 0.1,0, function() Ticker( ply ) end)
@@ -42,15 +42,11 @@ if SERVER then
 
     // If player got enough exp points to level up!
     --[[function Ticker( ply )
-
         //ply:ChatPrint("fml")
-
         if ExpPoints >= expreq then
             ply:ChatPrint("FUCK MY LIFE")
             levelUp()
-
         end
-
     end ]]--
 
     function levelUp ( ply )
@@ -58,11 +54,13 @@ if SERVER then
         CurrentLevel = ply:GetNWInt("level")
         CurrentEXP = ply:GetNWInt("experience")
         
+        
+        // Calculate required exp for next level
+        expreq =  math.Round( baseExp + (CurrentLevel^3.5 ))
+        ply:SetNWInt("expreq", expreq)
+        
         // Increase level by 1.
         ply:SetNWInt("level", CurrentLevel + 1)
-        // Calculate required exp for next level
-        expreq =  math.Round(CurrentEXP + ( baseExp + CurrentLevel^1.06 ))
-        ply:SetNWInt("expreq", expreq)
         
         // Reset EXP.
         ply:SetNWInt("experience", 0)

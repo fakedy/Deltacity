@@ -1,5 +1,7 @@
 AddCSLuaFile()
 function sql_value_stats ( ply )
+        baseExp = 100
+
 		unique_id = sql.QueryValue("SELECT unique_id FROM player_info WHERE unique_id = '"..steamID.."'")
 		money = sql.QueryValue("SELECT money FROM player_info WHERE unique_id = '"..steamID.."'")
 		level = sql.QueryValue("SELECT level FROM player_info WHERE unique_id = '"..steamID.."'")
@@ -8,6 +10,8 @@ function sql_value_stats ( ply )
 		ply:SetNWInt("money", money) 
 		ply:SetNWInt("level", level)
 		ply:SetNWInt("experience", experience)
+        expreq = math.Round( baseExp + (CurrentLevel^3.5 ))
+        ply:SetNWInt("expreq", expreq)
 end
 
 function saveStat ( ply )
@@ -108,5 +112,4 @@ end
 
 hook.Add( "PlayerInitialSpawn", "PlayerInitialSpawn", PlayerInitialSpawn )
 hook.Add( "Initialize", "Initialize", Initialize)
-
 
