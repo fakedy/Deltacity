@@ -1,8 +1,11 @@
 AddCSLuaFile()
 scoreboard = scoreboard or {}
 
+local DPanel = vgui.Create("DPanel")
+
 function scoreboard:show()
 
+    DPanel = vgui.Create("DPanel")
 
     -- Warning, this is the ugliest scoreboard you will ever see in your life.
     -- For some reason the font change everytime you hold tab :(
@@ -11,7 +14,7 @@ function scoreboard:show()
     -- Lol it stopped changing the font :O
 
     Msg( "Red is a noob at LUA\n" )
-    local DPanel = vgui.Create("DPanel")
+    
     DPanel:SetPos(ScrW() /4,ScrH() / 6)
     DPanel:SetSize(ScrW() /2,ScrH()/ 2)
 

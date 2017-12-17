@@ -2,7 +2,7 @@
 
 -- Declare gamemode information
 GM.Name = "DeltaCity"
-GM.Author = "Fakedy"
+GM.Author = "Fakedy & Red"
 GM.Email = ""
 GM.Website = ""
 

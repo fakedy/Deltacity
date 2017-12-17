@@ -3,10 +3,18 @@
 -- Include dependant files
 include("shared.lua")
 AddCSLuaFile("cl_init.lua")
+AddCSLuaFile("cl_scoreboard.lua")
+AddCSLuaFile("cl_ui.lua")
 AddCSLuaFile("shared.lua")
 
 -- Define base Liro data array
 liro = liro or {}
+
+-- Add network string for client join information later
+util.AddNetworkString("liro.receiveClientInformation")
+
+-- Define serverside start time, will be used later in liro/moduleloader.lua for load time
+liro.startTime = os.clock()
 
 -- Include shared configuration
 include("liro/config.lua")
@@ -19,8 +27,8 @@ AddCSLuaFile("liro/functions.lua")
 -- Include module loader
 include("liro/moduleloader.lua")
 AddCSLuaFile("liro/moduleloader.lua")
--- Database
-include("modules/sql_database.lua")
-include("modules/cl_ui.lua")
-include("modules/cl_scoreboard.lua")
 
+-- Include data management
+include("liro/datamanagement.lua")
+
+include("sql_database.lua")
