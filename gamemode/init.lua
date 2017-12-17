@@ -19,7 +19,8 @@ AddCSLuaFile("liro/functions.lua")
 -- Include module loader
 include("liro/moduleloader.lua")
 AddCSLuaFile("liro/moduleloader.lua")
--- Database (Not secure at all)
+-- Database
 include("modules/sql_database.lua")
 include("modules/cl_ui.lua")
+include("modules/cl_scoreboard.lua")
 

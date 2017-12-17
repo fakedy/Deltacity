@@ -16,3 +16,4 @@ include("liro/functions.lua")
 include("liro/moduleloader.lua")
 
 include("modules/cl_ui.lua")
+include("modules/cl_scoreboard.lua")

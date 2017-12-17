@@ -1,6 +1,6 @@
 if SERVER then 
 
-    baseExp = 100
+    baseExp = 1000
     
     Msg("Module Loaded \n")
     
@@ -14,7 +14,7 @@ if SERVER then
 
 
         --timer.Create("LevelUpChecker", 0.1,0, function() Ticker( ply ) end)
- 
+	
     end
 
     function AddExp(ply, amt)
@@ -34,7 +34,7 @@ if SERVER then
         RequirementEXP = ply:GetNWInt("expreq")
 
         if CurrentEXP >= RequirementEXP then
-            ply:ChatPrint("FUCK MY LIFE")
+		
             levelUp(ply)
 
         end
