@@ -10,7 +10,7 @@ function sql_value_stats ( ply )
 		ply:SetNWInt("money", money) 
 		ply:SetNWInt("level", level)
 		ply:SetNWInt("experience", experience)
-        expreq = math.Round( baseExp + (CurrentLevel^3.5 ))
+        expreq = math.Round( baseExp + (level^3.5 ))
         ply:SetNWInt("expreq", expreq)
 end
 
