@@ -1,6 +1,5 @@
 AddCSLuaFile()
 function sql_value_stats ( ply )
-        baseExp = 100
 
 		unique_id = sql.QueryValue("SELECT unique_id FROM player_info WHERE unique_id = '"..steamID.."'")
 		money = sql.QueryValue("SELECT money FROM player_info WHERE unique_id = '"..steamID.."'")
@@ -10,11 +9,11 @@ function sql_value_stats ( ply )
 		ply:SetNWInt("money", money) 
 		ply:SetNWInt("level", level)
 		ply:SetNWInt("experience", experience)
-        expreq = math.Round( baseExp + (CurrentLevel^3.5 ))
-        ply:SetNWInt("expreq", expreq)
 end
 
 function saveStat ( ply )
+
+		baseExp = 1000
         ply:ChatPrint("Player name is: "..ply:Name())
 		money = ply:GetNWInt("money")
 		level = ply:GetNWInt("level")
@@ -26,6 +25,9 @@ function saveStat ( ply )
 		sql.Query("UPDATE player_info SET money = "..money..", level = "..level..", exp = "..experience.." WHERE unique_id = '"..unique_id.."'")
 		ply:ChatPrint("Stats updated!") // chat message saying stats updated :)
 		
+        expreq = math.Round( baseExp + (level^3.5 ))
+        ply:SetNWInt("expreq", expreq)
+		
 		
 end
 
@@ -34,13 +36,13 @@ function tables_exist()
 		Msg("Both tables already exists !\n")
 	else
         //create tables
-        Msg("Lets create this shit!")
+        Msg("Lets create this shit!\n")
         query = "CREATE TABLE player_info ( unique_id varchar(255), money int, level int, exp int)"
         result = sql.Query(query)
         if (sql.TableExists("player_info")) then
-            Msg("Damn !  table 1 created!!!")
+            Msg("Damn !  table 1 created!!!\n")
         else
-                Msg("Some shit went wrong with the player_info query")
+                Msg("Some shit went wrong with the player_info query\n")
                 Msg( sql.LastError( result ) .. "\n" )
                 
         end
@@ -99,9 +101,14 @@ function PlayerInitialSpawn( ply )
         
         
         player_exists ( ply )
-        
-        
-        
+		
+		-- Makes sure that the player gets an expreq as soon as he join the server
+        baseExp = 1000
+        level = ply:GetNWInt("level")
+        expreq = math.Round( baseExp + (level^3.5 ))
+        ply:SetNWInt("expreq", expreq)
+		
+		
         // Creates a timer loop that repeats infinite every 5 seconds to save our stats
         timer.Create("SaveStat", 5, 0, function() saveStat( ply ) end)
     
