@@ -17,8 +17,3 @@ include("liro/functions.lua")
 
 -- Include module loader
 include("liro/moduleloader.lua")
-
-
-include("cl_ui.lua")
-AddCSLuaFile("cl_scoreboard.lua")
-include("cl_scoreboard.lua")

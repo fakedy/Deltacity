@@ -3,8 +3,6 @@
 -- Include dependant files
 include("shared.lua")
 AddCSLuaFile("cl_init.lua")
-AddCSLuaFile("cl_scoreboard.lua")
-AddCSLuaFile("cl_ui.lua")
 AddCSLuaFile("shared.lua")
 
 -- Define base Liro data array
@@ -30,5 +28,3 @@ AddCSLuaFile("liro/moduleloader.lua")
 
 -- Include data management
 include("liro/datamanagement.lua")
-
-include("sql_database.lua")
