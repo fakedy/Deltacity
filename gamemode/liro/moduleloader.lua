@@ -216,7 +216,7 @@ function liro.loadModules()
 				
 						print("//////////////////////////////////////////////////")
                         print(FormatStringForConsole("/ "..GAMEMODE.Name.." V" .. GAMEMODE.Version .. " /"))
-                        print(FormatStringForConsole("/ Made with Liro by Alydus /"))
+                        print(FormatStringForConsole("/ Made with Liro (alydus.net) /"))
                         print(FormatStringForConsole("/ OS: " .. liro.getSystemOS() .. " / LT: " .. math.Round(os.clock() - liro.startTime, 3) .. "s /"))
 						print("//////////////////////////////////////////////////")
                         print(FormatStringForConsole("Post-Initialization Complete"))
