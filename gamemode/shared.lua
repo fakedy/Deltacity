@@ -5,6 +5,6 @@ GM.Name = "DeltaCity"
 GM.Author = "Fakedy & Red"
 GM.Email = ""
 GM.Website = ""
-GM.Version = "1.8"
+GM.Version = "0.2"
 
 

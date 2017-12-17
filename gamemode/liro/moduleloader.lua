@@ -215,7 +215,8 @@ function liro.loadModules()
 					if SERVER or (CLIENT and liro.config.showConsoleLoadSequenceClientside and liro.config.showConsoleLoadSequenceRanksOnly and LocalPlayer() and LocalPlayer():GetUserGroup() and table.HasValue(liro.config.showConsoleLoadSequenceClientsideRanks, LocalPlayer():GetUserGroup())) then
 				
 						print("//////////////////////////////////////////////////")
-                        print(FormatStringForConsole("/ Liro V" .. GAMEMODE.Version .. " /"))
+                        print(FormatStringForConsole("/ "..GAMEMODE.Name.." V" .. GAMEMODE.Version .. " /"))
+                        print(FormatStringForConsole("/ Made with Liro by Alydus /"))
                         print(FormatStringForConsole("/ OS: " .. liro.getSystemOS() .. " / LT: " .. math.Round(os.clock() - liro.startTime, 3) .. "s /"))
 						print("//////////////////////////////////////////////////")
                         print(FormatStringForConsole("Post-Initialization Complete"))
