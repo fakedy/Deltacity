@@ -2,13 +2,13 @@ if SERVER then
 
     baseExp = 1000
     
-    Msg("Module Loaded \n")
+    liro.diagnosticPrint("Module Loaded \n")
     
     function PlayerInitialSpawn( ply )
 
         playerlevel = ply:GetNWInt("level")
-        ExpPoints = ply:GetNWInt("experience")
-        ply:ChatPrint(ExpPoints)
+        ExpPoints = ply:GetNWInt("experience") 
+        ply:ChatPrint(ExpPoints) 
         --expreq =  ExpPoints + ( baseExp + playerlevel^1.06 )
         --ply:SetNWInt("expreq", expreq)
 

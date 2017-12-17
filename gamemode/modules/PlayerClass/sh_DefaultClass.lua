@@ -1,4 +1,4 @@
-
+liro.diagnosticPrint("Module Loaded \n")
 
 local PLAYER = {}
 
