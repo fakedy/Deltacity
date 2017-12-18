@@ -1,6 +1,6 @@
 AddCSLuaFile()
 function sql_value_stats ( ply )
-        baseExp = 100
+        baseExp = 1000
 
 		unique_id = sql.QueryValue("SELECT unique_id FROM player_info WHERE unique_id = '"..steamID.."'")
 		money = sql.QueryValue("SELECT money FROM player_info WHERE unique_id = '"..steamID.."'")
@@ -15,16 +15,16 @@ function sql_value_stats ( ply )
 end
 
 function saveStat ( ply )
-        ply:ChatPrint("Player name is: "..ply:Name())
+       --Msg("Player name is: "..ply:Name())
 		money = ply:GetNWInt("money")
 		level = ply:GetNWInt("level")
 		experience = ply:GetNWInt("experience")
         
-		ply:ChatPrint("Money is: "..money)
-		ply:ChatPrint("EXP is: "..experience)
+		--Msg("Money is: "..money)
+		--Msg("EXP is: "..experience)
 		unique_id = ply:GetNWString ("SteamID")
 		sql.Query("UPDATE player_info SET money = "..money..", level = "..level..", exp = "..experience.." WHERE unique_id = '"..unique_id.."'")
-		ply:ChatPrint("Stats updated!") // chat message saying stats updated :)
+		--Msg("Stats updated!") // chat message saying stats updated :)
 		
 		
 end
@@ -83,7 +83,20 @@ end
 
 function Initialize()
 	tables_exist()
+	
+	timer.Create("SaveStat", 5, 0, function() SaveAllPlayers() end)
+	--timer.Simple(5, function() SaveAllPlayers() end)
+	
 end
+
+
+function SaveAllPlayers()
+    for k, v in pairs(player.GetAll()) do
+       --Msg( v:Nick() .. "\n")
+       saveStat(v)
+    end
+end
+
 
 function PlayerInitialSpawn( ply )
 // Fires after the player spawned for the first time
@@ -102,8 +115,7 @@ function PlayerInitialSpawn( ply )
         
         
         
-        // Creates a timer loop that repeats infinite every 5 seconds to save our stats
-        timer.Create("SaveStat", 5, 0, function() saveStat( ply ) end)
+        
     
 	
 	end)

@@ -34,7 +34,7 @@ SWEP.Primary.Delay = 0.1
 SWEP.Primary.Recoil = 1.5
 SWEP.Primary.Damage = 20
 SWEP.Primary.Cone = 0.018
-SWEP.Primary.Spread = 0.05
+SWEP.Primary.Spread = 0.04
 
 local ShootSound = Sound("Weapon_ak47.Single")
 

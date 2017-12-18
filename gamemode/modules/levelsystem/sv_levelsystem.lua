@@ -18,10 +18,10 @@ if SERVER then
     end
 
     function AddExp(ply, amt)
-        ply:ChatPrint("Adding "..amt.." EXP to player.");
+        --Msg("Adding "..amt.." EXP to player.");
         tempShit = ply:GetNWInt("experience")
         ply:SetNWInt("experience", tempShit + amt)
-        ply:ChatPrint("exp on player at give is: "..ply:GetNWInt("experience"));
+        --Msg("exp on player at give is: "..ply:GetNWInt("experience"));
         
         ShouldPlayerLevel(ply)
         

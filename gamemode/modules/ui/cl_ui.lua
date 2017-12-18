@@ -1,5 +1,6 @@
 AddCSLuaFile()
 hook.Add("HUDPaint", "DrawMyHud", function()
+
     // Money/Level Box
     surface.SetDrawColor(0,0,0, 128)
     surface.DrawRect(0,0,168,48)
@@ -18,4 +19,6 @@ hook.Add("HUDPaint", "DrawMyHud", function()
     // Experience
     surface.SetTextPos(ScrW() / 2 - 80,0 )
     surface.DrawText("Exp: " .. LocalPlayer():GetNWInt("experience") .. "/" .. LocalPlayer():GetNWInt("expreq"))
+	
+	
 end)
