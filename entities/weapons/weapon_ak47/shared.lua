@@ -42,7 +42,10 @@ function SWEP:Initialize()
 
 self:SetHoldType(self.HoldType)
 
+
 end
+
+if (!SERVER) then return end
 
 function SWEP:PrimaryAttack()
 
