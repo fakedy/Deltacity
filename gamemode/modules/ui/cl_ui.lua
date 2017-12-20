@@ -1,30 +1,7 @@
 AddCSLuaFile()
 hook.Add("HUDPaint", "DrawMyHud", function()
 
-	// Custom Font
-	surface.CreateFont( "DeltaFont",{
-	font = "Arial",
-	extended = false,
-	size = 13,
-	weight = 500,
-	blursize = 0,
-	scanlines = 0,
-	antialias = true,
-	underline = false,
-	italic = false,
-	strikeout = false,
-	symbol = false,
-	rotary = false,
-	shadow = false,
-	additive = false,
-	outline = false,
-	})
-	
-	
-	
-	
-	
-	
+
     // Money/Level Box
     surface.SetDrawColor(0,0,0, 128)
     surface.DrawRect(0,0,168,48)

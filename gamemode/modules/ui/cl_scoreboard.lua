@@ -14,28 +14,30 @@ function scoreboard:show()
     -- Lol it stopped changing the font :O
 
     // Creates the background and the list 
-    DPanel = vgui.Create("DPanel")
-    DPanel:SetPos(ScrW() /4,ScrH() / 6)
-    DPanel:SetSize(ScrW() /2,ScrH()/ 2)
+    DPanel1 = vgui.Create("DPanel")
+    DPanel1:SetPos(ScrW() /4,ScrH() / 6)
+    DPanel1:SetSize(ScrW() /2,ScrH()/ 2)
 	
-	local DListView = vgui.Create("DListView", DPanel)
-    DListView:SetSize(ScrW() /2, ScrH() /2)
-	--DPanel:SetFont("Default") // I cant get the fucking fonts to work argh :)))))
+	
+	// Creats the list
+	local DListView = vgui.Create("DListView", DPanel1)
+    DListView:SetSize(ScrW() /2, ScrH() /2)	
 	
 	// Setting up the Columns
 	local colName = DListView:AddColumn("Name")
-		local colName = DListView:AddColumn("SteamID")
+		local colSteamId = DListView:AddColumn("SteamID")
 		local colFrags = DListView:AddColumn("Kills")
 		local colDeaths = DListView:AddColumn("Deaths")
 		local colRank = DListView:AddColumn("Rank(Not implemented")
 		local colPing = DListView:AddColumn("Ping")
 		
+
 		// Loops through all players and adds them to the scoreboard
     for _, v in pairs ( player.GetAll()) do			
         local line = DListView:AddLine( v:Name(),v:SteamID(), v:Frags(), v:Deaths(),"Regular", v:Ping() )
         function line:Paint( w, h)
         
-		draw.RoundedBox(5,0,0,w,h,Color(145,234,255))
+		draw.RoundedBox(5,0,5,w,h,Color(145,234,255))
 		
         end
     end
@@ -46,7 +48,7 @@ end
 
 function scoreboard:hide()
 	
-	DPanel:Remove()
+	DPanel1:Remove()
 	
 	
 	
