@@ -1,34 +1,34 @@
 AddCSLuaFile()
 
-function sql_value_stats(ply, data)
+function sql_value_stats(ply)
     baseExp = 1000
-    data = sql.Query("SELECT * FROM player_info WHERE unique_id = 'STEAM_0:1:55625934'")
+    
+    data = sql.Query("SELECT * FROM player_info WHERE unique_id = '"..ply:SteamID().."'")
     --Msg(data[1]['unique_id'])
-    unique_id = data[1]['unique_id']--sql.QueryValue("SELECT unique_id FROM player_info WHERE unique_id = '"..steamID.."'")
+    local unique_id = data[1]['unique_id']--sql.QueryValue("SELECT unique_id FROM player_info WHERE unique_id = '"..steamID.."'")
     --Msg(type(unique_id))
-    money = tonumber(data[1]['money'], 10) --sql.QueryValue("SELECT money FROM player_info WHERE unique_id = '"..steamID.."'")
+    local money = tonumber(data[1]['money'], 10) --sql.QueryValue("SELECT money FROM player_info WHERE unique_id = '"..steamID.."'")
     --Msg(type(money))
-    level = tonumber(data[1]['level'], 10) --sql.QueryValue("SELECT level FROM player_info WHERE unique_id = '"..steamID.."'")
+    local level = tonumber(data[1]['level'], 10) --sql.QueryValue("SELECT level FROM player_info WHERE unique_id = '"..steamID.."'")
     --Msg(type(level))
-    experience = tonumber(data[1]['exp'], 10) --sql.QueryValue("SELECT exp FROM player_info WHERE unique_id = '"..steamID.."'")
+    local experience = tonumber(data[1]['exp'], 10) --sql.QueryValue("SELECT exp FROM player_info WHERE unique_id = '"..steamID.."'")
     --Msg(type(experience))
+    
     ply:SetNWString("unique_id", unique_id)
     ply:SetNWInt("money", money) 
     ply:SetNWInt("level", level)
     ply:SetNWInt("experience", experience)
     expreq = math.Round( baseExp + (level^3.5 ))
     ply:SetNWInt("expreq", expreq)
+    
 end
 
 function saveStat(ply)
-   --Msg("Player name is: "..ply:Name())
-    
-    --Msg("Money is: "..money)
-    --Msg("EXP is: "..experience)
+
     money = ply:GetNWInt("money")
     level = ply:GetNWInt("level")
     experience = ply:GetNWInt("experience")
-    unique_id = ply:GetNWString ("SteamID")
+    unique_id = ply:SteamID()
     sql.Query("UPDATE player_info SET money = "..money..", level = "..level..", exp = "..experience.." WHERE unique_id = '"..unique_id.."'")
     
 end
@@ -50,13 +50,22 @@ function tables_exist()
     end
 end
 
-function new_player(ply, result)
-	
-    steamID = ply:SteamID()
+function new_player(ply)
+    
+    local unique_id = ply:SteamID()
+    local money = 100
+    local level = 1
+    local experience = 0
     
     // Inserts the base player stats
-    sql.Query("INSERT INTO player_info ('unique_id', 'money', 'level', 'exp') VALUES ('"..steamID.."', '100', '1','0')")
-    --result = sql.Query( "SELECT * FROM player_info WHERE unique_id = '"..steamID.."'")
+    sql.Query("INSERT INTO player_info ('unique_id', 'money', 'level', 'exp') VALUES ('"..ply:SteamID().."', '"..money.."', '"..level.."','"..experience.."')")
+    --Msg("INSERT INTO player_info ('unique_id', 'money', 'level', 'exp') VALUES ('"..ply:SteamID().."', '"..money.."', '"..level.."','"..experience.."')")
+    
+    
+    Msg("Player account created!\n")
+    sql_value_stats(ply)
+    
+    /*result = sql.Query("SELECT * FROM player_info WHERE unique_id = '"..ply:SteamID().."'")
     
     if (result) then
         Msg("Player account created!\n")
@@ -64,17 +73,12 @@ function new_player(ply, result)
     else
         Msg("Some crazy shit went wrong with creating a player info!:O\n")
         Msg(sql.LastError(result).."\n")
-    end
+    end*/
 		
 end
 
 
-function Initialize()
-	tables_exist()
-	
-	timer.Create("SaveStat", 10, 0, function() SaveAllPlayers() end)
-	
-end
+
 
 
 function SaveAllPlayers()
@@ -83,6 +87,13 @@ function SaveAllPlayers()
        saveStat(v)
     end
 end
+
+function Initialize()
+	tables_exist()
+	
+	timer.Create("SaveStat", 10, 0, function() SaveAllPlayers() end)
+end
+hook.Add( "Initialize", "Initialize", Initialize)
 
 // Fires after the player spawned for the first time
 function PlayerInitialSpawn( ply )
@@ -99,16 +110,18 @@ function PlayerInitialSpawn( ply )
 		result = sql.Query("SELECT * FROM player_info WHERE unique_id = '"..ply:SteamID().."'")
 		if (result) then
             // Retrieves stats from database.
-            sql_value_stats(ply, result) 
+            sql_value_stats(ply) 
 		else
             // Creates new player since player wasnt in database.
-			new_player(ply, result)
+			new_player(ply)
 		end
         
 	end)
 
 end
-
 hook.Add( "PlayerInitialSpawn", "PlayerInitialSpawn", PlayerInitialSpawn )
-hook.Add( "Initialize", "Initialize", Initialize)
 
+// On player leave:
+function GM:PlayerDisconnected( ply )
+	 saveStat(ply)
+end
