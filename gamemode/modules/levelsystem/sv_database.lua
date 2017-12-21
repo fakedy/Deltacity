@@ -1,7 +1,7 @@
 AddCSLuaFile()
 
 function sql_value_stats(ply)
-    baseExp = 1000
+    --baseExp = 1000
     
     data = sql.Query("SELECT * FROM player_info WHERE unique_id = '"..ply:SteamID().."'")
     --Msg(data[1]['unique_id'])
